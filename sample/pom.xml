@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.sydney.sample</groupId>
+  <artifactId>sample</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <distributionManagement>
+    <site>
+      <id>website</id>
+      <url>scp://webhost.company.com/www/website</url>
+    </site>
+  </distributionManagement>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.version>4.12</junit.version>
+    <java.version>1.8</java.version>
+    <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+	<commons-lang3.version>3.5</commons-lang3.version>
+	<commons-collections4.version>4.1</commons-collections4.version>
+	<fastjson.version>1.2.21</fastjson.version>
+	<mysql-connector-java.version>5.1.30</mysql-connector-java.version>
+	<druid.version>1.0.29</druid.version>
+	<mybatis-spring-boot-starter.version>1.2.0</mybatis-spring-boot-starter.version>
+	<druid.version>1.0.29</druid.version>    
+  </properties>
+  
+  <dependencyManagement>
+  	<dependencies>
+  		<dependency>
+  			<groupId>junit</groupId>
+  			<artifactId>junit</artifactId>
+  			<version>${junit.version}</version>
+  		</dependency>
+		<dependency>
+			<!-- Import dependency management from Spring Boot -->
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-dependencies</artifactId>
+			<version>1.5.9.RELEASE</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>  
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-lang3</artifactId>
+		    <version>${commons-lang3.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.commons</groupId>
+		    <artifactId>commons-collections4</artifactId>
+		    <version>${commons-collections4.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>fastjson</artifactId>
+		    <version>${fastjson.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>${mysql-connector-java.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.mybatis.spring.boot</groupId>
+		    <artifactId>mybatis-spring-boot-starter</artifactId>
+		    <version>${mybatis-spring-boot-starter.version}</version>
+		</dependency>			
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>druid</artifactId>
+		    <version>${druid.version}</version>
+		</dependency>		
+				
+  	</dependencies>
+  
+  </dependencyManagement>
+  
+  
+  <modules>
+    <module>structure</module>
+     <module>dynamic-datasource</module>
+  </modules>
+
+  <build>
+  	<plugins>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-compiler-plugin</artifactId>
+  			 <version>${maven-compiler-plugin.version}</version>
+  			 
+  			 <configuration>
+  			 	<encoding>${project.build.sourceEncoding}</encoding>
+  			 	<source>${java.version}</source>
+  			 	<target>${java.version}</target>
+  			 
+  			 </configuration>
+  		
+  		</plugin>
+  	
+  	</plugins>
+  
+  </build>
+  
+</project>
