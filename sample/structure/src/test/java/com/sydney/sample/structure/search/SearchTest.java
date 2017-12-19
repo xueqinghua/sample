@@ -1,9 +1,17 @@
 package com.sydney.sample.structure.search;
 
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
 import java.util.TreeSet;
 
 import org.junit.Test;
+
+import com.sydney.sample.customer.entity.Customer;
 
 public class SearchTest {
 
@@ -115,18 +123,99 @@ public class SearchTest {
 		}
 	}
 	
-	
-	private void testParameter(long time,String ...keys) {
-		System.out.println(time);
-		for(String key:keys) {
-			System.out.println(key);
-		}
+	@Test
+	public void testCalendar() {
+		Calendar currentCalendar = Calendar.getInstance();
+		
+		Calendar yesterday = (Calendar) currentCalendar.clone();
+		yesterday.add(Calendar.HOUR_OF_DAY,-1);
+		
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+		
+		
+		System.out.println(simpleDateFormat.format(currentCalendar.getTime()));
+		System.out.println(simpleDateFormat.format(yesterday.getTime()));
 	}
+	
 	
 	@Test
-	public void testInvoke() {
-		testParameter(10,"16","12");
+	public void testSort() {
+		List<Date> dates = new ArrayList<>();
+		
+		
+		
+		Calendar currentCalendar = Calendar.getInstance();
+		
+		Calendar yesterday = (Calendar) currentCalendar.clone();
+		yesterday.add(Calendar.HOUR_OF_DAY,-1);
+		
+		
+		
+		for(int i=0;i<100;i++) {
+			Calendar before = (Calendar) currentCalendar.clone();
+			before.add(Calendar.DAY_OF_MONTH,i);
+			
+			dates.add(before.getTime());
+			dates.add(null);
+		}
+		
+		sort(new ArrayList<>());
+		
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+		for(Date date:dates) {
+			if (date==null) {
+				System.out.println(date);
+				continue;
+			}
+			System.out.println(simpleDateFormat.format(date));
+		}
+		
+		
 	}
+	
+	
+	private void sort(List<Date> dates) {
+		dates.sort(new Comparator<Date>() {
+
+			@Override
+			public int compare(Date o1, Date o2) {
+				
+				
+				if(o1==null) {
+					return -1;
+				}
+				
+				if(o2==null) {
+					return 1;
+				}
+				
+				// TODO Auto-generated method stub
+				return o1.compareTo(o2);
+			}
+		});
+	}
+	
+	
+	@Test
+	public void testMultiply() {
+		Integer a = new Integer(1);
+		
+		
+		Customer customer = new Customer();
+		customer.setAge(a);
+		
+		a = a+a;
+		
+		System.out.println(a);
+		System.out.println(customer.getAge());
+		
+		
+		
+		
+		//System.out.println(50+100*a);
+		
+	}
+	
 	
 	
 	
