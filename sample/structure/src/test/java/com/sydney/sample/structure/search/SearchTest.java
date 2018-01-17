@@ -196,26 +196,6 @@ public class SearchTest {
 	}
 	
 	
-	@Test
-	public void testMultiply() {
-		Integer a = new Integer(1);
-		
-		
-		Customer customer = new Customer();
-		customer.setAge(a);
-		
-		a = a+a;
-		
-		System.out.println(a);
-		System.out.println(customer.getAge());
-		
-		
-		
-		
-		//System.out.println(50+100*a);
-		
-	}
-	
 	
 	
 	

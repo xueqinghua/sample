@@ -5,13 +5,13 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
@@ -19,37 +19,38 @@ import com.alibaba.druid.pool.DruidDataSource;
 
 @org.springframework.context.annotation.Configuration
 public class Configuration {
+
+	@Bean(name="db_1")
+	@ConfigurationProperties(prefix="spring.datasource.ycloud_r")
+	public DataSource dataSourceYcloudReadOnly() {
+		
+		return DataSourceBuilder.create().type(DruidDataSource.class).build();
+	}
 	
+	@Bean(name="db_2")
+	@ConfigurationProperties(prefix="spring.datasource.ycloud_w")
+	public DataSource dataSourceYcloudReadWrite() {
+		return DataSourceBuilder.create().type(DruidDataSource.class).build();
+	}
+	
+	@Bean(name="db_3")
+	@ConfigurationProperties(prefix="spring.datasource.yoa_r")
+	public DataSource DataSourceYoaReadOnly() {
+		return DataSourceBuilder.create().type(DruidDataSource.class).build();
+	}
 	
 	@Bean
-	public DataSource dataSource() {
+	@Primary
+	public DataSource  DataSourceTest(@Qualifier("db_1")DataSource dataSourceYcloudReadOnly,@Qualifier("db_2")DataSource dataSourceYcloudReadWrite,@Qualifier("db_3")DataSource dataSourceYoaReadOnly) {
+
 		DynamicDataSource dynamicDataSource = new DynamicDataSource();
 		
-		DruidDataSource druidDataSourceA = new DruidDataSource();
-		druidDataSourceA.setUrl("jdbc:mysql://192.168.10.217:3306/ycloud?useUnicode=true&characterEncoding=utf-8");
-		druidDataSourceA.setUsername("root");
-		druidDataSourceA.setPassword("rootwywk123");
-		druidDataSourceA.setDriverClassName("com.mysql.jdbc.Driver");
-		druidDataSourceA.setInitialSize(10);
-		druidDataSourceA.setMaxActive(100);
-		druidDataSourceA.setTimeBetweenEvictionRunsMillis(60000);
-		druidDataSourceA.setMinIdle(10);
-		
-		DruidDataSource druidDataSourceB = new DruidDataSource();
-		druidDataSourceB.setUrl("jdbc:mysql://192.168.10.125:3306/ycloud-pro-20170414?useUnicode=true&characterEncoding=utf-8");
-		druidDataSourceB.setUsername("root");
-		druidDataSourceB.setPassword("rootwywk123");
-		druidDataSourceB.setDriverClassName("com.mysql.jdbc.Driver");
-		druidDataSourceB.setInitialSize(10);
-		druidDataSourceB.setMaxActive(100);
-		druidDataSourceB.setTimeBetweenEvictionRunsMillis(60000);
-		druidDataSourceB.setMinIdle(10);
-		
-		dynamicDataSource.setDefaultTargetDataSource(druidDataSourceA);
+		dynamicDataSource.setDefaultTargetDataSource(dataSourceYcloudReadOnly);
 		
 		Map<Object,Object> targetDataSources = new HashMap<>();
-		targetDataSources.put("ycloud",druidDataSourceA);
-		targetDataSources.put("yoa",druidDataSourceB);
+		targetDataSources.put("db_1",dataSourceYcloudReadOnly);
+		targetDataSources.put("db_2",dataSourceYcloudReadWrite);
+		targetDataSources.put("db_3",dataSourceYoaReadOnly);
 		
 		dynamicDataSource.setTargetDataSources(targetDataSources);
 		
@@ -58,7 +59,7 @@ public class Configuration {
 	}
 	
 	@Bean
-	public SqlSessionFactoryBean sqlSessionFactoryBean( DataSource dataSource) throws Exception {
+	public SqlSessionFactoryBean sqlSessionFactoryBean(DataSource dataSource) throws Exception {
 		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
 		factoryBean.setDataSource(dataSource);
 		factoryBean.setTypeAliasesPackage("com.sydney.sample.dynamic.datasource.user");

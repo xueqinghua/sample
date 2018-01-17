@@ -89,6 +89,8 @@
     <module>structure</module>
      <module>dynamic-datasource</module>
     <module>design-pattern</module>
+    <module>algorithm</module>
+    <module>feature</module>
   </modules>
 
   <build>

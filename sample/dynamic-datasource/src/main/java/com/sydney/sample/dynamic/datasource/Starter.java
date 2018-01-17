@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 @SpringBootApplication(scanBasePackages="com.sydney.sample.dynamic.datasource")
-@EnableTransactionManagement
+//@EnableTransactionManagement
 @MapperScan(basePackages="com.sydney.sample.dynamic.datasource",annotationClass = Repository.class)
 
 public class Starter {

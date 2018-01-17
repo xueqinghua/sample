@@ -1,8 +1,6 @@
-package com.sydney.sample.customer.entity;
+package com.sydney.sample.feature.customer.entity;
 
-import java.util.List;
-
-public class Customer {
+public class Customer extends Person {
 	
 	
 	static {
@@ -14,5 +12,7 @@ public class Customer {
 		System.out.println("Customer { }");
 	}
 	
+
+
 
 }
