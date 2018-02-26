@@ -21,27 +21,27 @@ import com.alibaba.druid.pool.DruidDataSource;
 public class Configuration {
 
 	@Bean(name="db_1")
-	@ConfigurationProperties(prefix="spring.datasource.ycloud_r")
+	@ConfigurationProperties(prefix="spring.datasource.db_1")
 	public DataSource dataSourceYcloudReadOnly() {
 		
 		return DataSourceBuilder.create().type(DruidDataSource.class).build();
 	}
 	
 	@Bean(name="db_2")
-	@ConfigurationProperties(prefix="spring.datasource.ycloud_w")
+	@ConfigurationProperties(prefix="spring.datasource.db_2")
 	public DataSource dataSourceYcloudReadWrite() {
 		return DataSourceBuilder.create().type(DruidDataSource.class).build();
 	}
 	
 	@Bean(name="db_3")
-	@ConfigurationProperties(prefix="spring.datasource.yoa_r")
+	@ConfigurationProperties(prefix="spring.datasource.db_3")
 	public DataSource DataSourceYoaReadOnly() {
 		return DataSourceBuilder.create().type(DruidDataSource.class).build();
 	}
 	
 	@Bean
 	@Primary
-	public DataSource  DataSourceTest(@Qualifier("db_1")DataSource dataSourceYcloudReadOnly,@Qualifier("db_2")DataSource dataSourceYcloudReadWrite,@Qualifier("db_3")DataSource dataSourceYoaReadOnly) {
+	public DataSource  dataSource(@Qualifier("db_1")DataSource dataSourceYcloudReadOnly,@Qualifier("db_2")DataSource dataSourceYcloudReadWrite,@Qualifier("db_3")DataSource dataSourceYoaReadOnly) {
 
 		DynamicDataSource dynamicDataSource = new DynamicDataSource();
 		
@@ -62,10 +62,10 @@ public class Configuration {
 	public SqlSessionFactoryBean sqlSessionFactoryBean(DataSource dataSource) throws Exception {
 		SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
 		factoryBean.setDataSource(dataSource);
-		factoryBean.setTypeAliasesPackage("com.sydney.sample.dynamic.datasource.user");
+		factoryBean.setTypeAliasesPackage("com.sydney.sample.dynamic.datasource");
 		
 		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-		Resource[] resources =resolver.getResources("mappings/com/sydney/sample/dynamic/datasource/**/UserDao.xml");
+		Resource[] resources =resolver.getResources("mappings/com/sydney/sample/dynamic/datasource/**/dao/*Dao.xml");
 		factoryBean.setMapperLocations(resources);
 		
 		return factoryBean;

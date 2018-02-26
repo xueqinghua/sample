@@ -1,18 +1,14 @@
 package com.sydney.sample.feature.customer;
 
-import static org.junit.Assert.*;
 
-import java.io.PrintStream;
 import java.lang.invoke.MethodHandle;
 import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
-import java.security.AlgorithmConstraints;
-import java.util.List;
+import java.lang.reflect.Method;
+import java.util.Calendar;
 
 import org.junit.Test;
 
-import com.sydney.sample.feature.customer.entity.Customer;
-import com.sydney.sample.feature.customer.entity.Person;
 
 public class CommonTest {
 
@@ -46,16 +42,46 @@ public class CommonTest {
 	public void testMethodHandle() throws Throwable {
 		
 		
-		MethodType methodType = MethodType.methodType(String.class, int.class, int.class);
-		
-		MethodHandles.Lookup lookup = MethodHandles.lookup();
-		
-		MethodHandle methodHandle = lookup.findVirtual(String.class, "substring", methodType);
+		long start = System.currentTimeMillis();
 		
 		
-		System.out.println(methodHandle.invoke("this is a test",1,3));
+		for(int i=0;i<1000000;i++) {
+			
+			MethodType methodType = MethodType.methodType(Void.TYPE, String.class);
+			
+			MethodHandles.Lookup lookup = MethodHandles.lookup();
+			
+			
+			MethodHandle methodHandle = lookup.findVirtual(this.getClass(), "out", methodType);
+
+			methodHandle.invoke(this,"aaaaaaaaaaaa");
+		}
 		
 		
+		System.out.println(System.currentTimeMillis()-start);
+		
+		
+	}
+	
+	@Test
+	public void TestMethod() throws Exception {
+		
+		long start = System.currentTimeMillis();
+		
+		for(int i=0;i<1000000;i++) {
+			
+			Method method = CommonTest.class.getDeclaredMethod("out",String.class);
+			//String.class.getd
+			String text = (String) method.invoke(this,"aaaaaaaaaaaa");
+		}
+
+		System.out.println(System.currentTimeMillis()-start);
+		
+	}
+	
+	
+	public  void out(String out) {
+		//System.out.println(out);
 	}
 	
 }

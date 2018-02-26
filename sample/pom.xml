@@ -91,6 +91,7 @@
     <module>design-pattern</module>
     <module>algorithm</module>
     <module>feature</module>
+    <module>auth</module>
   </modules>
 
   <build>

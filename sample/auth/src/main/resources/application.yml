@@ -1,0 +1,25 @@
+
+server: 
+#  contextPath: /auth
+  displayName: /auth2.0
+#spring.mvc.static-path-pattern=/**
+#spring.resources.static-locations=classpath:/static/,classpath:/templates/,classpath*:/webjars/,classpath:/resources/,classpath:/public/,classpath:/img/
+spring: 
+  thymeleaf: 
+    mode: HTML5
+    encoding: UTF-8
+    content-type: text/html
+    cache: false
+
+security:
+  oauth2:
+    client:
+      clientId: 233668646673605
+      clientSecret: 33b17e044ee6a4fa383f46ec6e28ea1d
+      accessTokenUri: https://graph.facebook.com/oauth/access_token
+      userAuthorizationUri: https://www.facebook.com/dialog/oauth
+      tokenName: oauth_token
+      authenticationScheme: query
+      clientAuthenticationScheme: form
+    resource:
+      userInfoUri: https://graph.facebook.com/me

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sydney.sample.dynamic.datasource.customer.dao.CustomerDao">
+
+	<sql id="columns">
+		a.id  AS id,
+		a.name AS name
+	</sql>
+	
+	<insert id="insert">
+		insert into user (
+			name
+		) values (
+			#{name}
+		)
+	</insert>
+	
+	<select id="findList" resultType="Customer">
+		select
+		<include refid="columns"/>
+		
+		from user a 
+	
+	</select>
+	
+</mapper>

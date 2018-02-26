@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.sydney.sample.dynamic.datasource.common.BaseTest;
 import com.sydney.sample.dynamic.datasource.common.configuration.DataSourceThreadHolder;
+import com.sydney.sample.dynamic.datasource.customer.dao.CustomerDao;
 import com.sydney.sample.dynamic.datasource.user.entity.User;
 
 
@@ -14,6 +15,8 @@ public class UserDaoTest extends BaseTest {
 	
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private CustomerDao customerDao;
 
 	@Test
 	public void testSave() {
