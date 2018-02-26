@@ -6,6 +6,7 @@ import java.lang.invoke.MethodHandles;
 import java.lang.invoke.MethodType;
 import java.lang.reflect.Method;
 import java.util.Calendar;
+import java.util.Date;
 
 import org.junit.Test;
 
@@ -89,5 +90,12 @@ public class CommonTest {
 		System.out.println(Calendar.getInstance());
 		
 	}
+	
+	@Test
+	public void testDate() {
+		System.out.println(new Date());
+		
+	}
+	
 	
 }
