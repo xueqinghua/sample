@@ -84,4 +84,10 @@ public class CommonTest {
 		//System.out.println(out);
 	}
 	
+	@Test
+	public void testCalendar() {
+		System.out.println(Calendar.getInstance());
+		
+	}
+	
 }
