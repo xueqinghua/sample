@@ -92,6 +92,7 @@
     <module>algorithm</module>
     <module>feature</module>
     <module>auth</module>
+    <module>security</module>
   </modules>
 
   <build>

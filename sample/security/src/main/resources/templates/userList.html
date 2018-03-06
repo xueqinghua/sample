@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot and Thymeleaf example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<table>
+<tr>
+<th>id</th>
+<th>name</th>
+<th>gender</th>
+<th>height</th>
+<th>age</th>
+<th>profession</th>
+</tr>
+
+<tr th:each="user:${userList}">
+<td th:text="${user.id}"></td>
+<td th:text="${user.name}"></td>
+<td th:text="${user.gender}"></td>
+<td th:text="${user.height}"></td>
+<td th:text="${user.age}"></td>
+<td th:text="${user.profession}"></td>
+</tr>
+</table>
+
+</body>
+</html>
