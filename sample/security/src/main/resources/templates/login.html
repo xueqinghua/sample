@@ -1,6 +1,61 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      
+      <script type="text/javascript" src="http://g.alicdn.com/dingding/dinglogin/0.0.5/ddLogin.js"/>
+      <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"/>
+      
+      
+      
+      <script type="text/javascript">
+      
+      
+      $(document).ready(function(){
+    	  
+    	  
+    	  var date = new Date();
+    	  
+    	  
+          var url = "https://oapi.dingtalk.com/connect/oauth2/sns_authorize?appid=dingoaf23uasdukgeqvuz0&amp;response_type=code&amp;scope=snsapi_login&amp;state="+date.getTime()+"&amp;redirect_uri=http://localhost:8080/security"      
+              var obj = DDLogin({
+            	     id:"login_container",
+            	     goto: url,
+            	     style: "border:none;background-color:#FFFFFF;",
+            	     width : "365",
+            	     height: "400"
+            	 });
+    	  
+    	  
+    	  
+    	  
+ 		 var hanndleMessage = function (event) {
+ 			console.log("loginTmpCode");
+	          var origin = event.origin;
+	          console.log("origin", event.origin);
+	          if( origin == "https://login.dingtalk.com" ) { //判断是否来自ddLogin扫码事件。
+	              var loginTmpCode = event.data; //拿到loginTmpCode后就可以在这里构造跳转链接进行跳转了
+	              console.log("loginTmpCode", loginTmpCode);
+	          }
+	   
+	  };
+	   
+	  if (typeof window.addEventListener != 'undefined') {
+	      window.addEventListener('message', hanndleMessage, false);
+	  } else if (typeof window.attachEvent != 'undefined') {
+	      window.attachEvent('onmessage', hanndleMessage);
+	  }
+    	  
+      });
+      
+
+      
+      
+      
+
+      
+      
+      
+      </script>
     <head>
         <title>Spring Security Example </title>
     </head>
@@ -16,5 +71,17 @@
             <div><label> Password: <input type="password" name="password"/> </label></div>
             <div><input type="submit" value="Sign In"/></div>
         </form>
+        
+        <div id="login_container">
+
+        </div>
+        
+        
+        <div>
+        
+        <a th:href="@{https://oapi.dingtalk.com/connect/qrconnect?appid=dingoaf23uasdukgeqvuz0&amp;response_type=code&amp;scope=snsapi_login&amp;state=STATE&amp;redirect_uri=http://localhost:8080/security/login/dingding}">use dingding account</a>
+
+        </div>
+        
     </body>
 </html>

@@ -26,7 +26,8 @@
 	<druid.version>1.0.29</druid.version>
 	<mybatis-spring-boot-starter.version>1.2.0</mybatis-spring-boot-starter.version>
 	<druid.version>1.0.29</druid.version>
-	<cglib.version>3.2.5</cglib.version>  
+	<cglib.version>3.2.5</cglib.version>
+	<commons-codec.version>1.11</commons-codec.version> 
   </properties>
   
   <dependencyManagement>
@@ -79,7 +80,15 @@
 		    <groupId>cglib</groupId>
 		    <artifactId>cglib</artifactId>
 		    <version>${cglib.version}</version>
-		</dependency>				
+		</dependency>
+		<dependency>
+		    <groupId>commons-codec</groupId>
+		    <artifactId>commons-codec</artifactId>
+		    <version>${commons-codec.version}</version>
+		</dependency>		
+		
+		
+						
   	</dependencies>
   
   </dependencyManagement>

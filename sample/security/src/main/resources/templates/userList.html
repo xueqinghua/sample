@@ -5,6 +5,19 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
+
+
+
+<div>
+  <h1 th:inline="text">current user: [[${#httpServletRequest.remoteUser}]]</h1>
+  <form th:action="@{/logout}" method="post">
+      <input type="submit" value="Sign Out"/>
+  </form>
+
+
+</div>
+
+<div>
 <table>
 <tr>
 <th>id</th>
@@ -24,6 +37,6 @@
 <td th:text="${user.profession}"></td>
 </tr>
 </table>
-
+</div>
 </body>
 </html>

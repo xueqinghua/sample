@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 
 import com.sydney.sample.security.BaseTest;
 import com.sydney.sample.security.user.entity.User;
@@ -32,6 +33,21 @@ public class UserDaoTest extends BaseTest {
 		}
 		
 		userDao.save(users);
+	}
+	
+	@Test
+	public void testFindOne() {
+		User entity = new User();
+		entity.setName("name_1");
+		
+		Example<User> example = Example.of(entity);
+		
+		
+		User user = userDao.findOne(example);
+		
+		System.out.println(user.getName());
+		
+		
 	}
 
 }
