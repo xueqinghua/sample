@@ -4,6 +4,7 @@ package com.sydney.sample.dynamic.datasource.user.dao;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sydney.sample.dynamic.datasource.common.BaseTest;
 import com.sydney.sample.dynamic.datasource.common.configuration.DataSourceThreadHolder;
@@ -22,7 +23,7 @@ public class UserDaoTest extends BaseTest {
 	public void testSave() {
 		try {
 			
-			DataSourceThreadHolder.context.set("yoa");
+			DataSourceThreadHolder.context.set("db_2");
 			
 			User user = new User();
 			user.setName("name_1");

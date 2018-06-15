@@ -12,11 +12,10 @@
       
       $(document).ready(function(){
     	  
-    	  
     	  var date = new Date();
     	  
     	  
-          var url = "https://oapi.dingtalk.com/connect/oauth2/sns_authorize?appid=dingoaf23uasdukgeqvuz0&amp;response_type=code&amp;scope=snsapi_login&amp;state="+date.getTime()+"&amp;redirect_uri=http://localhost:8080/security"      
+          var url = "https%3A%2F%2Foapi.dingtalk.com%2Fconnect%2Foauth2%2Fsns_authorize%3Fappid%3Ddingoaf23uasdukgeqvuz0%26response_type%3Dcode%26scope%3Dsnsapi_login%26state%3DSTATE%26redirect_uri%3Dhttp%3A%2F%2Flocalhost%3A8080%2Fsecurity%2Flogin%2Fdingding"      
               var obj = DDLogin({
             	     id:"login_container",
             	     goto: url,
@@ -25,16 +24,27 @@
             	     height: "400"
             	 });
     	  
-    	  
-    	  
-    	  
+    	    
  		 var hanndleMessage = function (event) {
+ 			 
  			console.log("loginTmpCode");
+ 			
+ 			
 	          var origin = event.origin;
 	          console.log("origin", event.origin);
 	          if( origin == "https://login.dingtalk.com" ) { //判断是否来自ddLogin扫码事件。
 	              var loginTmpCode = event.data; //拿到loginTmpCode后就可以在这里构造跳转链接进行跳转了
-	              console.log("loginTmpCode", loginTmpCode);
+	              
+	              
+	              
+	                            
+	              var url = "https%3A%2F%2Foapi.dingtalk.com%2Fconnect%2Foauth2%2Fsns_authorize%3Fappid%3Ddingoaf23uasdukgeqvuz0%26response_type%3Dcode%26scope%3Dsnsapi_login%26state%3DSTATE%26redirect_uri%3Dhttp%3A%2F%2Flocalhost%3A8080%2Fsecurity%2Flogin%2Fdingding%26loginTmpCode%3D";
+	              
+	              url = decodeURIComponent(url);
+	              
+	              window.location=url+loginTmpCode;
+	              
+	             
 	          }
 	   
 	  };
@@ -48,12 +58,6 @@
       });
       
 
-      
-      
-      
-
-      
-      
       
       </script>
     <head>

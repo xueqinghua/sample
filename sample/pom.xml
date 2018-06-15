@@ -13,6 +13,22 @@
       <url>scp://webhost.company.com/www/website</url>
     </site>
   </distributionManagement>
+  
+ <repositories>
+	<repository>
+		<!-- Maven 自带的中央仓库使用的Id为central 如果其他的仓库声明也是用该Id
+		就会覆盖中央仓库的配置 --> <id>mvnrepository</id>
+		<name>mvnrepository</name>
+		<url>http://www.mvnrepository.com/</url>
+		<layout>default</layout>
+		<releases>
+			<enabled>true</enabled>
+		</releases>
+		<snapshots>
+			<enabled>false</enabled>
+		</snapshots>
+	</repository>
+</repositories>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,7 +43,8 @@
 	<mybatis-spring-boot-starter.version>1.2.0</mybatis-spring-boot-starter.version>
 	<druid.version>1.0.29</druid.version>
 	<cglib.version>3.2.5</cglib.version>
-	<commons-codec.version>1.11</commons-codec.version> 
+	<commons-codec.version>1.11</commons-codec.version>
+	<kryo.version>4.0.1</kryo.version>
   </properties>
   
   <dependencyManagement>
@@ -86,7 +103,11 @@
 		    <artifactId>commons-codec</artifactId>
 		    <version>${commons-codec.version}</version>
 		</dependency>		
-		
+		<dependency>
+		    <groupId>com.esotericsoftware</groupId>
+		    <artifactId>kryo</artifactId>
+		    <version>${kryo.version}</version>
+		</dependency>		
 		
 						
   	</dependencies>
@@ -102,6 +123,8 @@
     <module>feature</module>
     <module>auth</module>
     <module>security</module>
+    <module>elastic</module>
+    <module>concurrent</module>
   </modules>
 
   <build>

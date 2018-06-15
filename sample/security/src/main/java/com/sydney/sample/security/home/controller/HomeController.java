@@ -1,13 +1,16 @@
 package com.sydney.sample.security.home.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sydney.sample.security.user.entity.User;
 
-//@Controller
+@Controller
+@RequestMapping("home")
 public class HomeController {
 	
-	//@RequestMapping("/")
+	@RequestMapping("/index")
 	public String index(Model model) {
 		
 		

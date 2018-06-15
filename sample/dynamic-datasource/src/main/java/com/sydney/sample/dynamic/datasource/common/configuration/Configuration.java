@@ -65,7 +65,7 @@ public class Configuration {
 		factoryBean.setTypeAliasesPackage("com.sydney.sample.dynamic.datasource");
 		
 		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-		Resource[] resources =resolver.getResources("mappings/com/sydney/sample/dynamic/datasource/**/dao/*Dao.xml");
+		Resource[] resources =resolver.getResources("mappings/com/sydney/sample/dynamic/datasource/**/*Dao.xml");
 		factoryBean.setMapperLocations(resources);
 		
 		return factoryBean;

@@ -7,12 +7,7 @@ public class Customer extends Person {
 		System.out.println("Customer static { }");
 	}
 	
-	
 	{
 		System.out.println("Customer { }");
-	}
-	
-
-
-
+	}	
 }

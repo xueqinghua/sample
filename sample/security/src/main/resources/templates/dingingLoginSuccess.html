@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot and Thymeleaf example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+   <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"/>
+      
+    <script th:inline="javascript">
+
+    
+    
+     function doSubmit() {
+    	 
+    	 var username = [[${user.name}]];
+    	 var password = [[${user.password}]];
+    	 
+    	 
+    	 $.ajax({
+    		      url: "http://localhost:8075/WebReport/ReportServer?op=fs_load",
+    		      type: "GET",
+    		      dataType: "jsonp", //指定服务器返回的数据类型
+    		      data:{"fr_username":username,"fr_password":password,"cmd":"sso"},
+    		      success: function (data) {
+    		    	  window.location=data.url;
+    		      }  
+    		   }); 
+     }
+     
+     
+    $(document).ready(function(){
+    	doSubmit();
+    	
+    	});
+    
+    
+    
+    </script>
+      
+
+      
+</head>
+<body>
+
+</body>
+</html>
